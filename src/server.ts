@@ -1,12 +1,13 @@
 import * as express from "express";
-// const express = require('express');
+import * as abaplint from "abaplint";
+
 const app = express();
 
-app.get('/', function (_req, res) {
-  res.send('Hello World7!');
+app.get("/", function (_req, res) {
+  res.send("abaplint: " + abaplint.Registry.abaplintVersion());
 });
 
-const port = process.env.PORT || 3000;;
+const port = process.env.PORT || 3000;
 app.listen(port, function () {
-  console.log('listening on port ' + port);
+  console.log("listening on port " + port);
 });
