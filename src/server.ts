@@ -1,8 +1,9 @@
-const express = require('express');
+import * as express from "express";
+// const express = require('express');
 const app = express();
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
+app.get('/', function (_req, res) {
+  res.send('Hello World7!');
 });
 
 const port = process.env.PORT || 3000;;

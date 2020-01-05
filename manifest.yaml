@@ -4,5 +4,6 @@ applications:
   random-route: true
   memory: 512M
   instances: 1
-  buildpack: nodejs_buildpack
+  buildpacks:
+  - nodejs_buildpack
   command: npm start
