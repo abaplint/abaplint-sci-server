@@ -1,0 +1,26 @@
+{
+  "name": "abaplint-cloud-foundry",
+  "version": "1.0.0",
+  "private": true,
+  "description": "testing",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abaplint/abaplint-cloud-foundry.git"
+  },
+  "author": "Lars Hvam Petersen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abaplint/abaplint-cloud-foundry/issues"
+  },
+  "homepage": "https://github.com/abaplint/abaplint-cloud-foundry#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.4"
+  }
+}

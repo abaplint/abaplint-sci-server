@@ -1,0 +1,8 @@
+---
+applications:
+- name: abaplint
+  random-route: true
+  memory: 512M
+  instances: 1
+  buildpack: nodejs_buildpack
+  command: npm start
