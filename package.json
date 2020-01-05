@@ -40,7 +40,14 @@
       "no-duplicate-imports": "error",
       "max-statements-per-line": "error",
       "semi-style": "error",
-      "indent": ["error", 2, { "ignoreComments": true, "SwitchCase": 1 }],
+      "indent": [
+        "error",
+        2,
+        {
+          "ignoreComments": true,
+          "SwitchCase": 1
+        }
+      ],
       "curly": "error"
     }
   },
