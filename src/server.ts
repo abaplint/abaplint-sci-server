@@ -21,7 +21,7 @@ app.get("/", function (_req, res) {
 });
 
 app.post("/api/v1/check_file", function (req, res) {
-  res.send(JSON.stringify(checkObject(req.body), null, 2));
+  res.json(checkObject(req.body));
 });
 
 // app.post("/api/v1/check_configuration",
