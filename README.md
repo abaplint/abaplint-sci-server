@@ -1,5 +1,5 @@
 # cloud_foundry
-Backend for [abaplint-cloud-foundry](https://github.com/abaplint/abaplint-cloud-foundry)
+Use with [abaplint-abap-backend](https://github.com/abaplint/abaplint-abap-backend)
 
 ## Deploying to CF
 `cf login`
