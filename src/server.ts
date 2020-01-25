@@ -24,10 +24,13 @@ app.post("/api/v1/check_file", function (req, res) {
   res.json(checkObject(req.body));
 });
 
+app.post("/api/v1/ping", function (_req, res) {
+  res.json({value: "abap is forevah!"});
+});
+
 // app.post("/api/v1/check_configuration",
 // app.post("/api/v1/default_configuration",
 // app.post("/api/v1/pretty_print",
-// app.post("/api/v1/ping",
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
