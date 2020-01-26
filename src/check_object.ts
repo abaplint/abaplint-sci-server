@@ -16,7 +16,7 @@ interface CheckObjectInput {
   configuration: string;
   object: ObjectIdentifer;
   files: InputFile[];
-  deps: InputFile[];
+  deps?: InputFile[];
 }
 
 interface CheckObjectOutput {
@@ -38,9 +38,11 @@ export function checkObject(input: CheckObjectInput): CheckObjectOutput {
     const file = new abaplint.MemoryFile(f.name, Buffer.from(f.contents, "base64").toString());
     reg.addFile(file);
   }
-  for (const d of input.deps) {
-    const file = new abaplint.MemoryFile(d.name, Buffer.from(d.contents, "base64").toString());
-    reg.addDependencies([file]);
+  if (input.deps) {
+    for (const d of input.deps) {
+      const file = new abaplint.MemoryFile(d.name, Buffer.from(d.contents, "base64").toString());
+      reg.addDependencies([file]);
+    }
   }
   output.issues = reg.findIssues();
 
