@@ -7,14 +7,16 @@ interface ObjectIdentifer {
 
 interface InputFile {
   name: string;
+  /** base64 encoded */
   contents: string;
 }
 
 interface CheckObjectInput {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  configuration: any;
+  /** base64 encoded */
+  configuration: string;
   object: ObjectIdentifer;
   files: InputFile[];
+  deps: InputFile[];
 }
 
 interface CheckObjectOutput {
@@ -35,6 +37,10 @@ export function checkObject(input: CheckObjectInput): CheckObjectOutput {
   for (const f of input.files) {
     const file = new abaplint.MemoryFile(f.name, Buffer.from(f.contents, "base64").toString());
     reg.addFile(file);
+  }
+  for (const d of input.deps) {
+    const file = new abaplint.MemoryFile(d.name, Buffer.from(d.contents, "base64").toString());
+    reg.addDependencies([file]);
   }
   output.issues = reg.findIssues();
 

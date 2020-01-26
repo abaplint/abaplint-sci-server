@@ -9,4 +9,4 @@ Use with [abaplint-abap-backend](https://github.com/abaplint/abaplint-abap-backe
 Free CF trial at https://www.sap.com/cmp/td/sap-cloud-platform-trial.html
 
 ## Overview
-![Components](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/abaplint/abaplint-cloud-foundry/master/components.iuml)
+![Components](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/abaplint/abaplint-cloud-foundry/master/docs/components.iuml)

@@ -13,12 +13,13 @@ app.get("/", function (_req, res) {
 });
 
 app.post("/api/v1/check_file", function (req, res) {
-  info.push("check_file " + new Date());
-  res.json(checkObject(req.body));
+  const result = checkObject(req.body);
+  info.push("check_file, " + result.object.objectName + ", " + result.issues.length + " issues, " + new Date());
+  res.json(result);
 });
 
 app.post("/api/v1/ping", function (_req, res) {
-  info.push("ping " + new Date());
+  info.push("ping, " + new Date());
   res.json({value: "abap is forevah!"});
 });
 
