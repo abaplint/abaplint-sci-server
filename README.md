@@ -1,7 +1,7 @@
 # cloud_foundry
 Use with [abaplint-abap-backend](https://github.com/abaplint/abaplint-abap-backend)
 
-## Deploying to CF
+## Deploying to Cloud Foundry
 `cf login`
 
 `cf push`

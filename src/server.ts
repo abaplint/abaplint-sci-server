@@ -1,35 +1,29 @@
 import * as express from "express";
-import * as abaplint from "abaplint";
-import * as os from "os";
-import { checkObject } from "./check_object";
+import {checkObject} from "./check_object";
+import {frontPage} from "./front_page";
+
+const info: string[] = [];
 
 const app = express();
 app.use(express.json());
-app.use (express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false}));
 
 app.get("/", function (_req, res) {
-
-  const response = "abaplint: " + abaplint.Registry.abaplintVersion() + "<br>" +
-    "<hr>" +
-    "load: " + os.loadavg() + "<br>" +
-    "uptime: " + os.uptime() + "<br>" +
-    "freemem: " + os.freemem() + "<br>" +
-    "hostname: " + os.hostname() + "<br>" +
-    "platform: " + os.platform() + "<br>" +
-    "cpus: " + JSON.stringify(os.cpus()) + "<br>";
-  res.send(response);
+  res.send(frontPage(info));
 });
 
 app.post("/api/v1/check_file", function (req, res) {
+  info.push("check_file " + new Date());
   res.json(checkObject(req.body));
 });
 
 app.post("/api/v1/ping", function (_req, res) {
+  info.push("ping " + new Date());
   res.json({value: "abap is forevah!"});
 });
 
 // app.post("/api/v1/check_configuration",
-// app.post("/api/v1/default_configuration",
+// app.post("/api/v1/get_default_configuration",
 // app.post("/api/v1/pretty_print",
 
 const port = process.env.PORT || 3000;
