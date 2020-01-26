@@ -30,9 +30,8 @@ export function checkObject(input: CheckObjectInput): CheckObjectOutput {
     issues: [],
   };
 
-// todo
-//  const config = new abaplint.Config(JSON.stringify(input.configuration));
-  const config = abaplint.Config.getDefault();
+  const config = new abaplint.Config(Buffer.from(input.configuration, "base64").toString());
+  // todo, if parsing of the config fails, fall back to the default, const config = abaplint.Config.getDefault();
   const reg = new abaplint.Registry(config);
   for (const f of input.files) {
     const file = new abaplint.MemoryFile(f.name, Buffer.from(f.contents, "base64").toString());
