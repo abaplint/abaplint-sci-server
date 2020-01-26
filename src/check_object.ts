@@ -33,7 +33,7 @@ export function checkObject(input: CheckObjectInput): CheckObjectOutput {
   const config = abaplint.Config.getDefault();
   const reg = new abaplint.Registry(config);
   for (const f of input.files) {
-    const file = new abaplint.MemoryFile(f.name, new Buffer(f.contents, "base64").toString());
+    const file = new abaplint.MemoryFile(f.name, Buffer.from(f.contents, "base64").toString());
     reg.addFile(file);
   }
   output.issues = reg.findIssues();
