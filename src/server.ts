@@ -14,7 +14,12 @@ app.get("/", function (_req, res) {
 
 app.post("/api/v1/check_file", function (req, res) {
   const result = checkObject(req.body);
-  info.push("check_file, " + result.object.objectName + ", " + result.issues.length + " issues, " + new Date());
+  info.push("check_file, " +
+    result.object.objectType + " " +
+    result.object.objectName + ", " +
+    result.issues.length + " issues, " +
+    new Date() + ", " +
+     req.socket.bytesRead + " bytes");
   res.json(result);
 });
 
