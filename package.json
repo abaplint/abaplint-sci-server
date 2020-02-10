@@ -54,7 +54,7 @@
   "homepage": "https://github.com/abaplint/abaplint-cloud-foundry#readme",
   "dependencies": {
     "@types/express": "^4.17.2",
-    "abaplint": "^2.24.6",
+    "abaplint": "^2.24.8",
     "express": "^4.17.1",
     "typescript": "^3.7.5"
   },
