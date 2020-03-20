@@ -21,36 +21,6 @@
   "engines": {
     "node": "12.13.x"
   },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended"
-    ],
-    "rules": {
-      "@typescript-eslint/interface-name-prefix": "off",
-      "quotes": "error",
-      "semi": "error",
-      "semi-spacing": "error",
-      "no-confusing-arrow": "error",
-      "no-duplicate-imports": "error",
-      "max-statements-per-line": "error",
-      "semi-style": "error",
-      "indent": [
-        "error",
-        2,
-        {
-          "ignoreComments": true,
-          "SwitchCase": 1
-        }
-      ],
-      "curly": "error"
-    }
-  },
   "homepage": "https://github.com/abaplint/abaplint-cloud-foundry#readme",
   "dependencies": {
     "abaplint": "^2.28.3",
