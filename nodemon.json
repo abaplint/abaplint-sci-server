@@ -1,0 +1,17 @@
+{
+    "ignore": [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "node_modules",
+        ".git",
+        ".vscode"
+    ],
+    "watch": [
+        "src"
+    ],
+    "exec": "npm start",
+    "ext": "ts",
+    "env": {
+        "NODE_ENV": "development"
+    }
+}
