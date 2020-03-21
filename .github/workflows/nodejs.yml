@@ -11,10 +11,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Use Node.js
       uses: actions/setup-node@v1
-    - name: npm install, npm run lint
+    - name: npm install, npm test
       run: |
         npm install
-        npm run lint
-        npm run test
+        npm test
       env:
         CI: true
