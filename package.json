@@ -11,7 +11,8 @@
     "dev": "nodemon",
     "dev:debug": "nodemon --inspect",
     "test": "jest",
-    "test:watch": "jest --watch"    
+    "posttest": "npm run lint",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
