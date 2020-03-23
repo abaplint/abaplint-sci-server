@@ -11,9 +11,18 @@ function osInfo(): string {
 }
 
 export function frontPage(info: string[]): string {
-  return "abaplint: " + abaplint.Registry.abaplintVersion() + "<br>" +
-    "<hr>" +
-    osInfo() +
-    "<hr>" +
-    info.join("<br>");
+  return `<!DOCTYPE html>
+<html>
+  <head>
+    <title>abaplint backend</title>
+  </head>
+  <body>
+    <p>abaplint: ${abaplint.Registry.abaplintVersion()}</p>
+    <hr>
+    ${osInfo()}
+    <hr>
+    ${info.join("<br>")}
+  </body>
+</html>
+`;
 }
