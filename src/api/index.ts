@@ -14,6 +14,7 @@ router.post("/ping", (_req, res) => {
 router.post("/check_file", (req, res) => {
   // TODO validate request
   // TODO define response type ?
+  // TODO capture exceptions, return json with error
   const result = checkObject(req.body);
   // addInfo("check_file, " +
   //   result.object.objectType + " " +
