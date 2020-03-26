@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  abaplint-backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: abaplint-backend
+    # volumes:
+    #   - .:/usr/src/app
+    #   - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+      # - 9229:9229
