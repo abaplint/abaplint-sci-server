@@ -1,0 +1,50 @@
+name: Docker Image CI
+
+on:
+#   schedule:
+    # every hour
+    # - cron:  '0 * * * *'
+  # push:
+  #   branches:
+  #     - master
+  repository_dispatch:
+    types:
+      - deploy_docker
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Detect version change
+      id: detect_version_change
+      env:
+        DOCKER_URL: https://registry.hub.docker.com/v1/repositories/abaplint/abaplint-backend
+        NPM_URL: https://registry.npmjs.org/abaplint
+      run: |
+        LAST_DOCKER_TAG=`curl -sS $DOCKER_URL/tags | jq '.[]["name"]' | tr -d '"' | grep -Po "(\d+\.)+\d+" | sort --version-sort | tail -1`
+        LAST_NPM_VERSION=`curl -sS $NPM_URL | jq '.time | to_entries[] | .key' | tr -d '"' | grep -Po "(\d+\.)+\d+" | sort --version-sort | tail -1`
+        echo Last docker version: $LAST_DOCKER_TAG
+        echo Last npm version: $LAST_NPM_VERSION
+        if [ "$LAST_DOCKER_TAG" != "$LAST_NPM_VERSION" ]; then
+          echo "::set-output name=VERSION_CHANGED::yes"
+          echo "::set-output name=NEW_VERSION::$LAST_NPM_VERSION"
+        else
+          echo "No version change detected"
+        fi
+    # Split build ? Test in between ?
+    - name: Build and publish docker container
+      if: success() && steps.detect_version_change.outputs.VERSION_CHANGED == 'yes'
+      env:
+        DOCKER_USERNAME: larshp
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REPO: abaplint/abaplint-backend
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ env.DOCKER_USERNAME }}
+        password: ${{ env.DOCKER_PASSWORD }}
+        repository: ${{ env.DOCKER_REPO }}
+        tags: latest, ${{ steps.detect_version_change.outputs.NEW_VERSION }}
+    # - name: Version validation
+    #   if: success() && steps.detect_version_change.outputs.VERSION_CHANGED == 'yes'
+    #   run: docker run abaplint/abaplint-backend:latest abaplint -v
