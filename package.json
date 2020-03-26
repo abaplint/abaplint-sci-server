@@ -24,7 +24,7 @@
     "url": "https://github.com/abaplint/abaplint-cloud-foundry/issues"
   },
   "engines": {
-    "node": "12.13.x"
+    "node": "12.x.x"
   },
   "homepage": "https://github.com/abaplint/abaplint-cloud-foundry#readme",
   "dependencies": {
