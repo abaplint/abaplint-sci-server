@@ -10,19 +10,23 @@ RUN npm run build
 
 FROM node:12-alpine
 
-RUN apk add --no-cache git
-# RUN apk add --no-cache tini
+RUN apk add --no-cache git tini
 
 ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+ENV NODE_ENV ${NODE_ENV}
+
+ARG PORT=3000
+ENV PORT $PORT
+EXPOSE $PORT
+
 WORKDIR /usr/src/app
 RUN chown node:node .
 USER node
 
 COPY ["package*.json", "LICENSE", "./"]
-RUN npm ci --quiet --only=production
+RUN npm ci --quiet --only=production && npm cache clean --force --silent
 COPY --from=builder /usr/src/app/build/ ./build
 
-ENTRYPOINT ["node", "build/server.js"]
-# ENTRYPOINT [ "/sbin/tini", "--", "node", "build/server.js" ]
-EXPOSE 3000
+# HEALTHCHECK --interval=30s CMD node healthcheck.js ?
+
+ENTRYPOINT [ "/sbin/tini", "--", "node", "build/server.js" ]

@@ -1,0 +1,13 @@
+#############
+# BASIC
+#############
+
+### frontpage
+GET http://localhost:3000
+
+### ping
+POST http://localhost:3000/api/v1/ping
+
+### error
+GET http://localhost:3000/api/v1/zzz
+
