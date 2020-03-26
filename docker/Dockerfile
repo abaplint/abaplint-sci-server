@@ -1,22 +1,28 @@
+FROM node:12-alpine as builder
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm ci --quiet
+COPY ["src", "tsconfig.json", "./"]
+RUN npm run build
+
+
 FROM node:12-alpine
 
-RUN apk add --no-cache git curl
+RUN apk add --no-cache git
+# RUN apk add --no-cache tini
 
-COPY docker/docker-entrypoint.sh /usr/local/bin/
-COPY ["package.json", "package-lock.json", "LICENSE", "./"]
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+WORKDIR /usr/src/app
+RUN chown node:node .
+USER node
 
-RUN npm install --silent --no-progress
+COPY ["package*.json", "LICENSE", "./"]
+RUN npm ci --quiet --only=production
+COPY --from=builder /usr/src/app/build/ ./build
 
-COPY ["src", "tsconfig.json", "./"]
-
-RUN npm run build && \
-    du -h -d 0 node_modules/ && \
-    npm prune --production && \
-    du -h -d 0 node_modules/ && \
-    npm link
-
+ENTRYPOINT ["node", "build/server.js"]
+# ENTRYPOINT [ "/sbin/tini", "--", "node", "build/server.js" ]
 EXPOSE 3000
-
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-# CMD ["abaplint"]
