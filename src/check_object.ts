@@ -1,4 +1,4 @@
-import * as abaplint from "abaplint";
+import * as abaplint from "@abaplint/core";
 
 interface ObjectIdentifer {
   objectName: string;
