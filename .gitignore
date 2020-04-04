@@ -1,5 +1,11 @@
+# Artifacts
 node_modules
 build
+coverage
+
+# Environment and secrets
+.env
+
+# Other
 .vscode
 .DS_Store
-coverage
