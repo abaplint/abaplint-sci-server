@@ -4,6 +4,10 @@ Use with [abaplint-abap-backend](https://github.com/abaplint/abaplint-abap-backe
 ## Deploying to Cloud Foundry
 `cf login`
 
+`npm install`
+
+`npm test`
+
 `cf push`
 
 Free CF trial at https://www.sap.com/cmp/td/sap-cloud-platform-trial.html

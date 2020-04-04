@@ -1,45 +1,42 @@
-import * as express from "express";
-import {checkObject} from "./check_object";
-import {frontPage} from "./front_page";
+import * as dotenv from "dotenv";
+dotenv.config();
+import app from "./app";
+import type { Server } from "http";
 
-const info: string[] = [];
+const port = process.env.PORT || 3000;
+let server: Server | null = null;
 
-function addInfo(s: string): void {
-  info.push(s);
-  if (info.length > 10) {
-    info.shift();
+function shutdown(server: Server | null, code = 0): void {
+  if (server) {
+    server.close((err) => {
+      if (err) {
+        console.error(err);
+        code = 1;
+      }
+      process.exit(code);
+    });
+  } else {
+    process.exit(code);
   }
 }
 
-const app = express();
-app.use(express.json({limit: "50mb"}));
-app.use(express.urlencoded({limit: "50mb", extended: false}));
-
-app.get("/", function (_req, res) {
-  res.send(frontPage(info));
+// quit on ctrl-c when running docker in terminal
+process.on("SIGINT", () => {
+  console.log("Got SIGINT. Graceful shutdown.", new Date().toISOString());
+  shutdown(server);
 });
 
-app.post("/api/v1/check_file", function (req, res) {
-  const result = checkObject(req.body);
-  addInfo("check_file, " +
-    result.object.objectType + " " +
-    result.object.objectName + ", " +
-    result.issues.length + " issues, " +
-    new Date() + ", " +
-     req.socket.bytesRead + " bytes");
-  res.json(result);
+// quit properly on docker stop
+process.on("SIGTERM", () => {
+  console.log("Got SIGTERM. Graceful shutdown.", new Date().toISOString());
+  shutdown(server);
 });
 
-app.post("/api/v1/ping", function (_req, res) {
-  addInfo("ping, " + new Date());
-  res.json({value: "abap is forevah!"});
+process.on("unhandledRejection", (reason) => {
+  console.log("CRASH! unhandledRejection:", reason);
+  shutdown(server, 1);
 });
 
-// app.post("/api/v1/check_configuration",
-// app.post("/api/v1/get_default_configuration",
-// app.post("/api/v1/pretty_print",
-
-const port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log("listening on port " + port);
+server = app.listen(port, () => {
+  console.log("listening on port: " + port);
 });
