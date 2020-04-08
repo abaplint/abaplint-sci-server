@@ -4,6 +4,12 @@ docker run -p 3000:3000 abaplint-backend
 
 docker-compose -f docker/docker-compose.yml --project-directory . up
 
+## Useful
+
+- `docker rm $(docker ps -qa --no-trunc --filter "status=exited")` - remove stopped containers
+- `docker image prune` - remove dangling images (no tag)
+- `docker image prune -a` - remove all unused images
+
 ## Cool
 - https://github.com/kevinpollet/typescript-docker-multi-stage-build
 
