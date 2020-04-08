@@ -24,9 +24,8 @@ jobs:
       run: |
         docker build -f docker/Dockerfile -t abaplint-backend .
         docker run -d --rm -p 3000:3000 abaplint-backend
-    - name: test healthz
-      run: |
-        test `curl -sS localhost:3000/healthz` = "OK"
+        RESPONSE=`curl -sS localhost:3000/healthz` || true
+        test "$RESPONSE" = "OK"
     - name: stop containers
       if: always()
       run: docker stop $(docker ps -a -q)
