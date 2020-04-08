@@ -34,3 +34,20 @@ your can change the port adding `-e "port=xxx"` param
 See the content of `docker` directory. There are Dockerfile and docker-compose template. E.g. run `docker build -f docker/Dockerfile -t abaplint-backend .` to build your image from scratch.
 
 TODO: https docker compose, logging advices
+
+## Development
+
+Useful scripts
+
+- npm
+  - `npm run run` - start server
+  - `npm run lint` - lint code
+  - `npm run build` - build typescript into `build` dir
+  - `npm run dev` - start dev server (nodemon)
+  - `npm run dev:debug` - start nodemon with debugger
+  - `npm run test` - run tests
+  - `npm run test:watch` - run tests in watch mode
+  - `npm run start` - run built code with bare node - used for CF
+- docker
+  - `bin/docker-build.sh` - build docker container from command line (supposes bash environment)
+  - `bin/docker-run.sh` - run the built above container
