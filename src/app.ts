@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== "test") {
 }
 
 app.get("/", (_req, res) => res.send(frontPage([])));
-app.get("/healthz", (_req, res) => res.send("FAIL"));
+app.get("/healthz", (_req, res) => res.send("OK"));
 app.use("/api/v1", api);
 app.use("*", (_req, res) => res.status(404).send("forbidden") );
 
