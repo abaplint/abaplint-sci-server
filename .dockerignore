@@ -1,0 +1,21 @@
+# Node
+node_modules
+npm-debug.log
+
+# Artifacts
+docs
+build
+
+# Docker
+.dockerignore
+docker
+
+# Git
+.git
+.gitignore
+
+# Other
+README.md
+.vscode
+.cfignore
+

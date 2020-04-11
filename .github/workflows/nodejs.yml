@@ -3,10 +3,8 @@ name: Node CI
 on: [push, pull_request]
 
 jobs:
-  build:
-
+  test-js:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js
@@ -17,3 +15,25 @@ jobs:
         npm test
       env:
         CI: true
+
+  test-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: build and start container
+      run: |
+        docker build -f docker/Dockerfile -t abaplint-backend .
+        docker run -d --rm -p 3000:3000 abaplint-backend
+        sleep 5s
+    - name: runcheck healthz
+      run: |
+        RESPONSE=`curl -sS localhost:3000/healthz` || true
+        if [ "$RESPONSE" = "OK" ]; then
+          echo "healthz is OK"
+        else
+          echo "$RESPONSE"
+          exit 1
+        fi
+    - name: stop containers
+      if: always()
+      run: docker stop $(docker ps -a -q)

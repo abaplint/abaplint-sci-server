@@ -9,7 +9,7 @@
     "watch": [
         "src"
     ],
-    "exec": "npm start",
+    "exec": "npm run run",
     "ext": "ts",
     "env": {
         "NODE_ENV": "development"
