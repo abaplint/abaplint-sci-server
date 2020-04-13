@@ -1,5 +1,7 @@
 # Cloud foundry abaplint backend
 
+This project enables abaplint to be run in the context of SAP Code Inspector, allowing immediate feedback to the ABAP developers in their standard editor, SE24 / SE80 / SE38 / ABAP in Eclipse. And also works seamlessly with other places where the code inspector is triggered.
+
 Use with [abaplint-abap-backend](https://github.com/abaplint/abaplint-abap-backend)
 
 ## Deploying to Cloud Foundry
