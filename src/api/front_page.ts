@@ -1,6 +1,6 @@
 import * as abaplint from "@abaplint/core";
 import * as os from "os";
-import { getLogTail } from "./lib/log-tail";
+import { getLogTail } from "../lib/log-tail";
 
 function osInfo(): string {
   return "load: " + os.loadavg() + "<br>" +
@@ -20,7 +20,7 @@ function renderLogTail(): string {
   }
 }
 
-export function frontPage(): string {
+export function renderFrontPage(): string {
   return `<!DOCTYPE html>
 <html>
   <head>
