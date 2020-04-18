@@ -12,7 +12,7 @@ function osInfo(): string {
 }
 
 function renderLogTail(): string {
-  if (process.env.ALB_SUPRESS_FRONPAGE_LOG === "1") {
+  if (process.env.ALB_SUPPRESS_FRONPAGE_LOG === "1") {
     return "";
   } else {
     const info = getLogTail();
