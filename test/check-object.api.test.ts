@@ -31,11 +31,16 @@ write 'Hello world'.`;
   // maybe use https://github.com/Dean177/jest-to-match-shape-of
   const res = await request(app).post("/api/v1/check_file").send(checkObjectInput);
   expect(res.status).toBe(200);
-  expect(typeof res.body).toBe("object");
-  expect(res.body.object).toEqual({
-    objectName: "ZXXX",
-    objectType: "PROG",
+  expect(res.body).toMatchObject({
+    success: 1,
+    payload: {
+      object: {
+        objectName: "ZXXX",
+        objectType: "PROG",
+      }
+    }
   });
-  expect(Array.isArray(res.body.issues)).toBeTruthy();
-  expect(res.body.issues.length).toBe(2);
+  const { issues } = res.body.payload;
+  expect(Array.isArray(issues)).toBeTruthy();
+  expect(issues.length).toBe(2);
 });
