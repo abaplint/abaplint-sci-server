@@ -2,7 +2,7 @@ import app from "../src/app";
 import * as request from "supertest";
 
 test("smoke test: ping", async () => {
-  const res = await request(app).post("/api/v1/ping");
+  const res = await request(app).get("/api/v1/ping");
   expect(res.status).toBe(200);
   expect(res.body).toEqual({ success: true, payload: "abap is forevah!" });
 });

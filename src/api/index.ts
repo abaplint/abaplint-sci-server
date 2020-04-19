@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(express.json({limit: "50mb"}));
 router.use(express.urlencoded({limit: "50mb", extended: false}));
 
-router.post("/ping", (_req, res) => {
+router.get("/ping", (_req, res) => {
   addInfoEx("ping");
   res.json({ success: true, payload: "abap is forevah!" });
 });
