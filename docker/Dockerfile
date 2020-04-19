@@ -27,6 +27,6 @@ COPY ["package*.json", "LICENSE", "./"]
 RUN npm ci --quiet --only=production && npm cache clean --force --silent
 COPY --from=builder /usr/src/app/build/ ./build
 
-# HEALTHCHECK --interval=30s CMD node healthcheck.js ?
+# HEALTHCHECK --interval=30s CMD node healthcheck.js ? or curl localhost/healthz = OK ?
 
 ENTRYPOINT [ "/sbin/tini", "--", "node", "build/server.js" ]

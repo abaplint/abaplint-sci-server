@@ -3,17 +3,9 @@ import * as morgan from "morgan";
 import * as helmet from "helmet";
 import { frontPage } from "./front_page";
 import api from "./api";
+import { addInfoEx } from "./lib/log-tail";
 
 const app  = express();
-
-// const info: string[] = [];
-
-// function addInfo(s: string): void {
-//   info.push(s);
-//   if (info.length > 10) {
-//     info.shift();
-//   }
-// }
 
 if (process.env.NODE_ENV !== "test") {
   // app.use(cors());
@@ -21,9 +13,12 @@ if (process.env.NODE_ENV !== "test") {
   app.use(morgan("common"));
 }
 
-app.get("/", (_req, res) => res.send(frontPage([])));
+app.get("/", (_req, res) => res.send(frontPage()));
 app.get("/healthz", (_req, res) => res.send("OK"));
 app.use("/api/v1", api);
-app.use("*", (_req, res) => res.status(404).send("forbidden") );
+app.use("*", (req, res) => {
+  addInfoEx("unexpected request: " + req.originalUrl);
+  res.status(404).send("forbidden");
+});
 
 export default app;

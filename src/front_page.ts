@@ -1,5 +1,6 @@
 import * as abaplint from "@abaplint/core";
 import * as os from "os";
+import { getLogTail } from "./lib/log-tail";
 
 function osInfo(): string {
   return "load: " + os.loadavg() + "<br>" +
@@ -10,7 +11,16 @@ function osInfo(): string {
     "cpus: " + JSON.stringify(os.cpus()) + "<br>";
 }
 
-export function frontPage(info: string[]): string {
+function renderLogTail(): string {
+  if (process.env.ALB_SUPPRESS_FRONPAGE_LOG === "1") {
+    return "";
+  } else {
+    const info = getLogTail();
+    return info.join("<br>");
+  }
+}
+
+export function frontPage(): string {
   return `<!DOCTYPE html>
 <html>
   <head>
@@ -21,7 +31,7 @@ export function frontPage(info: string[]): string {
     <hr>
     ${osInfo()}
     <hr>
-    ${info.join("<br>")}
+    ${renderLogTail()}
   </body>
 </html>
 `;

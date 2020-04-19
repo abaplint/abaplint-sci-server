@@ -32,7 +32,14 @@ your can change the port adding `-e "port=xxx"` param
 
 See the content of `docker` directory. There are Dockerfile and docker-compose template. E.g. run `docker build -f docker/Dockerfile -t abaplint-backend .` to build your image from scratch.
 
-TODO: https docker compose, logging advices
+*TODO: https docker compose, logging advices*
+
+### Env variables
+
+The package respects `.env` file (must not be committed to the repo though!). Here are the available variables:
+
+- PORT - port to listen at
+- ALB_SUPPRESS_FRONPAGE_LOG - disable frontpage log: set `1` to disable
 
 ## Development
 
@@ -50,3 +57,5 @@ Useful scripts
 - docker
   - `bin/docker-build.sh` - build docker container from command line (supposes bash environment)
   - `bin/docker-run.sh` - run the built above container
+
+See also: [docker dev notes](./docker/dev-notes.md)
