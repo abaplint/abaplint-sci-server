@@ -34,7 +34,7 @@ write 'Hello world'.`;
       objectType: "PROG"
     },
     issues: [
-      {
+      { data: {
         message: "Keyword should be upper case: \"write\"",
         key: "keyword_case",
         start: {
@@ -45,9 +45,10 @@ write 'Hello world'.`;
           row: 4,
           col: 6
         },
-        "filename": "zxxx.prog.abap"
-      },
-      {
+        filename: "zxxx.prog.abap",
+        fix: undefined,
+      }},
+      { data: {
         message: "Indentation problem, expected 0 spaces",
         key: "indentation",
         start: {
@@ -58,8 +59,9 @@ write 'Hello world'.`;
           row: 3,
           col: 26
         },
-        filename: "zxxx.prog.abap"
-      }
+        filename: "zxxx.prog.abap",
+        fix: undefined,
+      } }
     ]
   });
 });
