@@ -19,10 +19,16 @@ router.get("/ping", (_req, res) => {
 
 router.post("/check_file", (req, res) => {
   // TODO validate request
-  // TODO capture exceptions, return json with error
-  const hrstart = process.hrtime();
-  const result = checkObject(req.body);
-  const hrend = process.hrtime(hrstart);
+  let hrstart, result, hrend;
+  try {
+    hrstart = process.hrtime();
+    result = checkObject(req.body);
+    hrend = process.hrtime(hrstart);
+  } catch (err) {
+    err.message = "[abaplint] " + err.message;
+    throw err;
+  }
+
   addInfoEx([
     "check_file",
     result.object.objectType,
@@ -41,6 +47,11 @@ router.post("/check_file", (req, res) => {
 router.all("*", (req, res) => {
   addInfoEx("unexpected API call: " + req.originalUrl);
   res.status(404).json(createErrorResponse("Wrong API call"));
+});
+
+router.use((err: Error, _req: express.Request, res: express.Response, next: express.NextFunction) => {
+  res.status(500).json(createErrorResponse(err.message));
+  next(err);
 });
 
 export default router;
