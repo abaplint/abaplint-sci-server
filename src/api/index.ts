@@ -1,24 +1,34 @@
 import * as express from "express";
-import {checkObject} from "./check_object";
+import { checkObject, CheckObjectOutput } from "./check_object";
 import { addInfoEx } from "../lib/log-tail";
+import {
+  createErrorResponse,
+  createSuccessStringResponse,
+  createSuccessResponse,
+} from "./api-types";
 
 const router = express.Router();
 
 router.use(express.json({limit: "50mb"}));
 router.use(express.urlencoded({limit: "50mb", extended: false}));
 
-router.post("/ping", (_req, res) => {
+router.get("/ping", (_req, res) => {
   addInfoEx("ping");
-  res.json({ success: true, payload: "abap is forevah!" });
+  res.json(createSuccessStringResponse("abap is forevah!"));
 });
 
 router.post("/check_file", (req, res) => {
   // TODO validate request
-  // TODO define response type ?
-  // TODO capture exceptions, return json with error
-  const hrstart = process.hrtime();
-  const result = checkObject(req.body);
-  const hrend = process.hrtime(hrstart);
+  let hrstart, result, hrend;
+  try {
+    hrstart = process.hrtime();
+    result = checkObject(req.body);
+    hrend = process.hrtime(hrstart);
+  } catch (err) {
+    err.message = "[abaplint] " + err.message;
+    throw err;
+  }
+
   addInfoEx([
     "check_file",
     result.object.objectType,
@@ -27,7 +37,7 @@ router.post("/check_file", (req, res) => {
     `${req.socket.bytesRead} bytes`,
     `${(hrend[0] * 1000 + hrend[1] / 1000000).toFixed()} ms`,
   ]);
-  res.json(result);
+  res.json(createSuccessResponse<CheckObjectOutput>(result));
 });
 
 // app.post("/api/v1/check_configuration",
@@ -36,7 +46,12 @@ router.post("/check_file", (req, res) => {
 
 router.all("*", (req, res) => {
   addInfoEx("unexpected API call: " + req.originalUrl);
-  res.status(404).json({ success: false, error: { message: "Wrong API call" } });
+  res.status(404).json(createErrorResponse("Wrong API call"));
+});
+
+router.use((err: Error, _req: express.Request, res: express.Response, next: express.NextFunction) => {
+  res.status(500).json(createErrorResponse(err.message));
+  next(err);
 });
 
 export default router;

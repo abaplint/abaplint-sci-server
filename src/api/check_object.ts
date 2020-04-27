@@ -19,7 +19,7 @@ interface CheckObjectInput {
   deps?: InputFile[];
 }
 
-interface CheckObjectOutput {
+export interface CheckObjectOutput {
   object: ObjectIdentifer;
   issues: abaplint.Issue[];
 }

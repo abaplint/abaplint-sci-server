@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "testing",
-  "main": "build/server.js",
+  "main": "build/src/server.js",
   "bin": {
-    "abaplint-backend": "build/server.js"
+    "abaplint-backend": "build/src/server.js"
   },
   "scripts": {
     "run": "ts-node src/server.ts",
