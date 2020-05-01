@@ -16,7 +16,7 @@
     "target": "es2017",
     "sourceMap": true
   },
-  "filesGlob": [
+  "include": [
     "./src/**/*.ts"
   ]
 }

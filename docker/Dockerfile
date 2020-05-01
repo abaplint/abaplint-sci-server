@@ -4,7 +4,8 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 RUN npm ci --quiet
-COPY ["src", "tsconfig.json", "./"]
+COPY tsconfig.json ./
+COPY ./src ./src
 RUN npm run build
 
 
@@ -24,6 +25,7 @@ RUN chown node:node .
 USER node
 
 COPY ["package*.json", "LICENSE", "./"]
+COPY ./public ./public
 RUN npm ci --quiet --only=production && npm cache clean --force --silent
 COPY --from=builder /usr/src/app/build/ ./build
 
