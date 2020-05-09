@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "testing",
-  "main": "build/src/server.js",
+  "main": "build/server.js",
   "bin": {
-    "abaplint-backend": "build/src/server.js"
+    "abaplint-backend": "build/server.js"
   },
   "scripts": {
     "run": "ts-node src/server.ts",
@@ -16,7 +16,7 @@
     "test": "jest",
     "posttest": "npm run lint",
     "test:watch": "jest --watch",
-    "start": "node build/src/server.js"
+    "start": "node build/server.js"
   },
   "repository": {
     "type": "git",
@@ -36,15 +36,16 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.22.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.6",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.4",
     "@types/helmet": "0.0.46",
+    "@types/jest": "^25.2.1",
     "@types/morgan": "^1.9.0",
-    "typescript": "^3.8.3",
+    "@types/node": "^13.13.4",
+    "@types/serve-favicon": "^2.5.0",
     "@types/supertest": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
@@ -53,6 +54,7 @@
     "nodemon": "^2.0.3",
     "supertest": "^4.0.2",
     "ts-jest": "^25.4.0",
-    "ts-node": "^8.9.1"
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
   }
 }
