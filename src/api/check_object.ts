@@ -21,7 +21,7 @@ interface CheckObjectInput {
 
 export interface CheckObjectOutput {
   object: ObjectIdentifer;
-  issues: abaplint.Issue[];
+  issues: readonly abaplint.Issue[];
 }
 
 export function checkObject(input: CheckObjectInput): CheckObjectOutput {
