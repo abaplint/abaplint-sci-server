@@ -1,4 +1,4 @@
-name: Node CI
+name: Build
 
 on: [push, pull_request]
 
@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0      
     - name: build and start container
       run: |
         docker build -f docker/Dockerfile -t abaplint-backend .
@@ -37,3 +39,22 @@ jobs:
     - name: stop containers
       if: always()
       run: docker stop $(docker ps -a -q)
+    - name: Determine version
+      id: determine_version
+      run: |
+        NEW_VERSION=`git rev-list HEAD --count`
+        echo New Version: $NEW_VERSION
+        echo "::set-output name=NEW_VERSION::$NEW_VERSION"
+    - name: Build and publish docker container
+      if: success() && github.ref == 'refs/heads/master' && github.repository == 'abaplint/abaplint-cloud-foundry'
+      env:
+        DOCKER_USERNAME: larshp
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REPO: abaplint/abaplint-backend
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ env.DOCKER_USERNAME }}
+        password: ${{ env.DOCKER_PASSWORD }}
+        repository: abaplint/abaplint-backend
+        tags: latest, ${{ steps.determine_version.outputs.NEW_VERSION }}
+      
