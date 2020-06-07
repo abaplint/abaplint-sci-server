@@ -28,41 +28,10 @@ write 'Hello world'.`;
   };
 
   const output = checkObject(checkObjectInput);
-  expect(output).toEqual({
-    object: {
-      objectName: "ZXXX",
-      objectType: "PROG"
-    },
-    issues: [
-      { data: {
-        message: "Keyword should be upper case: \"write\"",
-        key: "keyword_case",
-        start: {
-          row: 4,
-          col: 1
-        },
-        end: {
-          row: 4,
-          col: 6
-        },
-        filename: "zxxx.prog.abap",
-        fix: undefined,
-      }},
-      { data: {
-        message: "Indentation problem, expected 0 spaces",
-        key: "indentation",
-        start: {
-          row: 3,
-          col: 3
-        },
-        end: {
-          row: 3,
-          col: 26
-        },
-        filename: "zxxx.prog.abap",
-        fix: undefined,
-      } }
-    ]
+  expect(output.object).toEqual({
+    objectName: "ZXXX",
+    objectType: "PROG"
   });
+  expect(output.issues.length).toEqual(2);
 });
 
