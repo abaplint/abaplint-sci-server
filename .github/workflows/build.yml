@@ -24,7 +24,7 @@ jobs:
         fetch-depth: 0      
     - name: build and start container
       run: |
-        docker build -f docker/Dockerfile -t abaplint-backend .
+        docker build -f Dockerfile -t abaplint-backend .
         docker run -d --rm -p 3000:3000 abaplint-backend
         sleep 5s
     - name: runcheck healthz
@@ -56,6 +56,5 @@ jobs:
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ env.DOCKER_PASSWORD }}
         repository: abaplint/abaplint-backend
-        path: ./docker/ 
         tags: latest, ${{ steps.determine_version.outputs.NEW_VERSION }}
       
