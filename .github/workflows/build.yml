@@ -45,7 +45,7 @@ jobs:
         NEW_VERSION=`git rev-list HEAD --count`
         echo "::set-output name=NEW_VERSION::$NEW_VERSION"
     - name: Build and publish docker container
-      if: success() && github.ref == 'refs/heads/master' && github.repository == 'abaplint/abaplint'
+      if: success() && github.ref == 'refs/heads/master' && github.repository == 'abaplint/abaplint-cloud-foundry'
       env:
         DOCKER_USERNAME: larshp
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
