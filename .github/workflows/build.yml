@@ -56,5 +56,6 @@ jobs:
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ env.DOCKER_PASSWORD }}
         repository: abaplint/abaplint-backend
+        path: ./docker/ 
         tags: latest, ${{ steps.determine_version.outputs.NEW_VERSION }}
       
