@@ -35,7 +35,7 @@
     "@abaplint/core": "^2.36.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "helmet": "^3.22.0",
+    "helmet": "^3.23.0",
     "morgan": "^1.10.0",
     "serve-favicon": "^2.5.0"
   },
