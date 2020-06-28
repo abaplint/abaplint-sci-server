@@ -42,6 +42,7 @@ jobs:
     - name: Determine version
       id: determine_version
       run: |
+        npm install
         GIT_VERSION=`git rev-list HEAD --count`
         ABAPLINT_VERSION=`node -p "require('@abaplint/core/package.json').version"`
         NEW_VERSION=`${GIT_VERSION}-${ABAPLINT_VERSION}`
