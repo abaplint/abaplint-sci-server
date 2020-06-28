@@ -47,7 +47,7 @@ jobs:
         echo Git Version: $GIT_VERSION
         ABAPLINT_VERSION=`node -p "require('@abaplint/core/package.json').version"`
         echo abaplint Version: $ABAPLINT_VERSION
-        NEW_VERSION=`${GIT_VERSION}-${ABAPLINT_VERSION}`
+        NEW_VERSION=`echo ${GIT_VERSION}-${ABAPLINT_VERSION}`
         echo New Version: $NEW_VERSION
         echo "::set-output name=NEW_VERSION::$NEW_VERSION"
     - name: Build and publish docker container
