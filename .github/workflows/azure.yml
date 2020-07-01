@@ -23,6 +23,8 @@ jobs:
         - run: |
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ github.sha }}
+            docker run -d --rm -p 3000:80 ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ github.sha }}
+            sleep 5s
         - name: 'Deploy to Azure Container Instances'
           uses: 'azure/aci-deploy@v1'
           with:
