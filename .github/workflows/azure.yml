@@ -36,5 +36,4 @@ jobs:
             name: abaplint-backend
             location: 'east us'
         - run: |
-            docker run -d --rm -p 3000:80 ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ github.sha }}
-            sleep 5s
+            docker run -d --rm -p 3000:3000 ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ github.sha }}
