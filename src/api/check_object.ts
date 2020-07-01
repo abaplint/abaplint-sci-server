@@ -24,6 +24,12 @@ export interface CheckObjectOutput {
   issues: readonly abaplint.Issue[];
 }
 
+const defaultConf: abaplint.Config = abaplint.Config.getDefault();
+
+export function getDefaultConfig() : abaplint.Config {
+  return defaultConf;
+}
+
 export function checkObject(input: CheckObjectInput): CheckObjectOutput {
   const output: CheckObjectOutput = {
     object: input.object,

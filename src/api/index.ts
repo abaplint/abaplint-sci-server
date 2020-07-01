@@ -1,5 +1,5 @@
 import * as express from "express";
-import { checkObject, CheckObjectOutput } from "./check_object";
+import { checkObject, CheckObjectOutput, getDefaultConfig } from "./check_object";
 import { addInfoEx } from "../lib/log-tail";
 import {
   createErrorResponse,
@@ -15,6 +15,10 @@ router.use(express.urlencoded({limit: "50mb", extended: false}));
 router.get("/ping", (_req, res) => {
   addInfoEx("ping");
   res.json(createSuccessStringResponse("abap is forevah!"));
+});
+
+router.get("/get_default_configuration", (_,res) => {
+  res.json(getDefaultConfig());
 });
 
 router.post("/check_file", (req, res) => {
@@ -41,7 +45,6 @@ router.post("/check_file", (req, res) => {
 });
 
 // app.post("/api/v1/check_configuration",
-// app.post("/api/v1/get_default_configuration",
 // app.post("/api/v1/pretty_print",
 
 router.all("*", (req, res) => {
