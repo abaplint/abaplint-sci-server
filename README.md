@@ -58,4 +58,4 @@ Useful scripts
   - `bin/docker-build.sh` - build docker container from command line (supposes bash environment)
   - `bin/docker-run.sh` - run the built above container
 
-See also: [docker dev notes](./docker/dev-notes.md)
+See also: [docker dev notes](./dev-notes.md)
