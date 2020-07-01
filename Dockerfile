@@ -16,7 +16,7 @@ RUN apk add --no-cache git tini
 ARG NODE_ENV=production
 ENV NODE_ENV ${NODE_ENV}
 
-ARG PORT=80
+ARG PORT=3000
 ENV PORT $PORT
 EXPOSE $PORT
 
