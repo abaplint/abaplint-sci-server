@@ -1,5 +1,6 @@
 import * as express from "express";
-import { checkObject, CheckObjectOutput, getDefaultConfig, GetDefaultConfigOutput } from "./check_object";
+import { checkObject, CheckObjectOutput } from "./check_object";
+import { getDefaultConfig, GetDefaultConfigOutput } from "./lint_config";
 import { addInfoEx } from "../lib/log-tail";
 import {
   createErrorResponse,
