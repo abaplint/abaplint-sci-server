@@ -16,16 +16,16 @@ jobs:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
         - name: Determine Version
-            id: determine_version
-            run: |
-              npm install
-              GIT_VERSION=`git rev-list HEAD --count`
-              echo Git Version: $GIT_VERSION
-              ABAPLINT_VERSION=`node -p "require('@abaplint/core/package.json').version"`
-              echo abaplint Version: $ABAPLINT_VERSION
-              NEW_VERSION=`echo ${GIT_VERSION}-${ABAPLINT_VERSION}`
-              echo New Version: $NEW_VERSION
-              echo "::set-output name=NEW_VERSION::$NEW_VERSION"
+          id: determine_version
+          run: |
+            npm install
+            GIT_VERSION=`git rev-list HEAD --count`
+            echo Git Version: $GIT_VERSION
+            ABAPLINT_VERSION=`node -p "require('@abaplint/core/package.json').version"`
+            echo abaplint Version: $ABAPLINT_VERSION
+            NEW_VERSION=`echo ${GIT_VERSION}-${ABAPLINT_VERSION}`
+            echo New Version: $NEW_VERSION
+            echo "::set-output name=NEW_VERSION::$NEW_VERSION"
 
         - name: 'Build and Push Image'
           uses: azure/docker-login@v1
