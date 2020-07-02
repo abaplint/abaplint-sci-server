@@ -24,9 +24,15 @@ export interface CheckObjectOutput {
   issues: readonly abaplint.Issue[];
 }
 
-const defaultConf: abaplint.Config = abaplint.Config.getDefault();
+export interface GetDefaultConfigOutput {
+  config: abaplint.Config;
+}
 
-export function getDefaultConfig() : abaplint.Config {
+const defaultConf: GetDefaultConfigOutput = {
+  config: abaplint.Config.getDefault()
+};
+
+export function getDefaultConfig(): GetDefaultConfigOutput {
   return defaultConf;
 }
 

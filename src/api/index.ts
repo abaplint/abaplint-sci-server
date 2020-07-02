@@ -1,5 +1,5 @@
 import * as express from "express";
-import { checkObject, CheckObjectOutput, getDefaultConfig } from "./check_object";
+import { checkObject, CheckObjectOutput, getDefaultConfig, GetDefaultConfigOutput } from "./check_object";
 import { addInfoEx } from "../lib/log-tail";
 import {
   createErrorResponse,
@@ -18,7 +18,7 @@ router.get("/ping", (_req, res) => {
 });
 
 router.get("/get_default_configuration", (_,res) => {
-  res.json(getDefaultConfig());
+  res.json(createSuccessResponse<GetDefaultConfigOutput>(getDefaultConfig()));
 });
 
 router.post("/check_file", (req, res) => {
