@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        fetch-depth: 0      
+        fetch-depth: 0
     - name: build and start container
       run: |
         docker build -f Dockerfile -t abaplint-backend .
@@ -42,7 +42,12 @@ jobs:
     - name: Determine version
       id: determine_version
       run: |
-        NEW_VERSION=`git rev-list HEAD --count`
+        npm install
+        GIT_VERSION=`git rev-list HEAD --count`
+        echo Git Version: $GIT_VERSION
+        ABAPLINT_VERSION=`node -p "require('@abaplint/core/package.json').version"`
+        echo abaplint Version: $ABAPLINT_VERSION
+        NEW_VERSION=`echo ${GIT_VERSION}-${ABAPLINT_VERSION}`
         echo New Version: $NEW_VERSION
         echo "::set-output name=NEW_VERSION::$NEW_VERSION"
     - name: Build and publish docker container
@@ -57,4 +62,3 @@ jobs:
         password: ${{ env.DOCKER_PASSWORD }}
         repository: abaplint/abaplint-backend
         tags: latest, ${{ steps.determine_version.outputs.NEW_VERSION }}
-      
