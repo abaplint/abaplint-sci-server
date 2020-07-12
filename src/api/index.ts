@@ -18,8 +18,9 @@ router.get("/ping", (_req, res) => {
   res.json(createSuccessStringResponse("abap is forevah!"));
 });
 
-router.get("/get_default_configuration", (_,res) => {
-  res.json(createSuccessResponse<GetDefaultConfigOutput>(getDefaultConfig()));
+router.get("/default_config", (_,res) => {
+  const defaultConfig = getDefaultConfig();
+  res.json(createSuccessResponse<GetDefaultConfigOutput>(defaultConfig));
 });
 
 router.post("/check_file", (req, res) => {
