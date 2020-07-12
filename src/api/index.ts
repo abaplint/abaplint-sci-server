@@ -19,6 +19,7 @@ router.get("/ping", (_req, res) => {
 });
 
 router.get("/default_config", (_,res) => {
+  addInfoEx("default_config");
   const defaultConfig = getDefaultConfig();
   res.json(createSuccessResponse<GetDefaultConfigOutput>(defaultConfig));
 });
