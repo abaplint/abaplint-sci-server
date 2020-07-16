@@ -1,12 +1,7 @@
 import * as abaplint from "@abaplint/core";
 
-export interface GetDefaultConfigOutput {
-  config: abaplint.Config;
-}
-
-const defaultConf: GetDefaultConfigOutput = {
-  config: abaplint.Config.getDefault()
-};
+const defaultConf = abaplint.Config.getDefault();
+export type GetDefaultConfigOutput = abaplint.Config;
 
 export function getDefaultConfig(): GetDefaultConfigOutput {
   return defaultConf;
