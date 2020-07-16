@@ -51,7 +51,7 @@ jobs:
         echo New Version: $NEW_VERSION
         echo "::set-output name=NEW_VERSION::$NEW_VERSION"
     - name: Build and publish docker container
-      if: success() && github.ref == 'refs/heads/master' && github.repository == 'abaplint/abaplint-cloud-foundry'
+      if: success() && github.ref == 'refs/heads/master' && github.repository == 'abaplint/abaplint-sci-server'
       env:
         DOCKER_USERNAME: larshp
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
