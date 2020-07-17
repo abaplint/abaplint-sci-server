@@ -16,3 +16,6 @@ POST http://localhost:3000/api/v1/check_file
 
 ### favicon
 GET http://localhost:3000/favicon.ico
+
+### default config
+GET http://localhost:3000/api/v1/default_config

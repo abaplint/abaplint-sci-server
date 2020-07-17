@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/abaplint/abaplint-cloud-foundry#readme",
   "dependencies": {
-    "@abaplint/core": "^2.37.5",
+    "@abaplint/core": "^2.37.13",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.23.3",
@@ -40,21 +40,21 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.6",
+    "@types/express": "^4.17.7",
     "@types/helmet": "0.0.47",
-    "@types/jest": "^26.0.3",
+    "@types/jest": "^26.0.4",
     "@types/morgan": "^1.9.1",
-    "@types/node": "^14.0.14",
+    "@types/node": "^14.0.23",
     "@types/serve-favicon": "^2.5.0",
     "@types/supertest": "^2.0.10",
-    "@typescript-eslint/eslint-plugin": "^3.5.0",
-    "@typescript-eslint/parser": "^3.5.0",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
     "eslint": "^7.4.0",
     "jest": "^26.1.0",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2",
-    "ts-jest": "^26.1.1",
+    "ts-jest": "^26.1.3",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   }
 }
