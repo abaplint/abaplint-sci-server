@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/abaplint/abaplint-cloud-foundry#readme",
   "dependencies": {
-    "@abaplint/core": "^2.38.7",
+    "@abaplint/core": "^2.38.8",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.23.3",
