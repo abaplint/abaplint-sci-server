@@ -6,6 +6,7 @@ import api from "./api";
 import { addInfoEx } from "./lib/log-tail";
 import * as path from "path";
 import * as favicon from "serve-favicon";
+import * as abaplint from "@abaplint/core";
 
 const app  = express();
 
@@ -14,6 +15,12 @@ if (process.env.NODE_ENV !== "test") {
   app.use(helmet());
   app.use(morgan("common"));
 }
+
+// add abaplint version as header field to all replies
+app.use(function(_req, res, next) {
+  res.setHeader("x-abaplint-version", abaplint.Registry.abaplintVersion());
+  next();
+});
 
 app.use(favicon(path.join(__dirname, "..", "public", "favicon.ico")));
 app.get("/", (_req, res) => res.send(renderFrontPage()));
