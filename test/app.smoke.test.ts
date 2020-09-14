@@ -4,7 +4,9 @@ import * as request from "supertest";
 test("smoke test: ping", async () => {
   const res = await request(app).get("/api/v1/ping");
   expect(res.status).toBe(200);
-  expect(res.body).toEqual({ success: 1, payload: "abap is forevah!" });
+  expect(Object.keys(res.body).sort()).toEqual(["payload", "success"]);
+  expect(res.body.success).toBe(1);
+  expect(res.body.payload).toMatch(/Server is OK, abaplint version = \d{1,3}.\d{1,3}.\d{1,3}/);
 });
 
 test("smoke test: 404", async () => {
