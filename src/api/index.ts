@@ -7,6 +7,7 @@ import {
   createErrorResponse,
   createSuccessResponse,
 } from "./api-types";
+import { listRules } from "./list_rules";
 
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.use(express.json({limit: "50mb"}));
 router.use(express.urlencoded({limit: "50mb", extended: false}));
 
 router.get("/ping", pingHandler);
+router.get("/list_rules", listRules);
 
 router.get("/default_config", (_,res) => {
   addInfoEx("default_config");
