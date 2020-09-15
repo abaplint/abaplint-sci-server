@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import * as abaplint from "@abaplint/core";
 import { addInfoEx } from "../lib/log-tail";
-import { createSuccessStringResponse } from "./api-types";
+import { createSuccessResponse } from "./api-types";
 
 export function listRules(_req: Request, res: Response): void {
 
@@ -19,5 +19,5 @@ export function listRules(_req: Request, res: Response): void {
   }
 
   addInfoEx("listRules");
-  res.json(createSuccessStringResponse(JSON.stringify(json)));
+  res.json(createSuccessResponse<unknown>(json));
 }
