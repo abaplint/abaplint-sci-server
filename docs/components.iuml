@@ -1,15 +1,15 @@
 @startuml components
 skinparam monochrome true
 
-cloud "Cloud Foundry" as cf {
+cloud "Cloud Server" as cf {
   rectangle "Node Application" {
-    rectangle "abaplint-cloud-foundry" as acf
+    rectangle "abaplint-sci-server" as acf
   }
 }
 
 rectangle "ABAP Application Server" as SAP {
   rectangle "Code Inspector" as SCI {
-    rectangle "abaplint-abap-backend" as aab
+    rectangle "abaplint-sci-client" as aab
   }
   actor se80
   se80 -> SCI
