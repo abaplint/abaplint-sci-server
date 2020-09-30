@@ -1,8 +1,6 @@
-# abaplint Integration with SAP Code Inspector (Server)
+# abaplint SCI Server
 
 This project enables abaplint to be run in the context of SAP Code Inspector (SCI), allowing immediate feedback to the ABAP developers in their standard editor, SE24 / SE80 / SE38 / ABAP in Eclipse. And also works seamlessly with other places where the code inspector is triggered like ABAP Test Cockpit (ATC).
-
-Use with 
 
 ## Overview
 
@@ -28,11 +26,13 @@ Free CF trial at https://www.sap.com/cmp/td/sap-cloud-platform-trial.html
 
 ### Deployment on Azure Container Instance 
 
-You can configure a Github action to automatically create an abaplint Server running in an Azure container instance (see [details](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-github-action).
+You can configure a Github action to automatically create an abaplint Server running in an [Azure Container Instance](./docs/azure.md).
 
-### Deployment on Docker On-premises
+### Deployment on Docker Image
 
-#### Simple way
+A complete docker image is available on [Docker Hub](https://hub.docker.com/r/abaplint/abaplint-backend).
+
+#### Simple Way
 
 `docker run abaplint/abaplint-backend -p 3000:3000`
 
@@ -40,15 +40,15 @@ or for background
 
 `docker run abaplint/abaplint-backend -p 3000:3000 -d`
 
-your can change the port adding `-e "port=xxx"` param
+You can change the port adding `-e "port=xxx"` parameter.
 
-#### Building own container
+#### Building Own Container
 
 See the content of `docker` directory. There are Dockerfile and docker-compose template. E.g. run `docker build -f docker/Dockerfile -t abaplint-backend .` to build your image from scratch.
 
 *TODO: https docker compose, logging advices*
 
-#### Env variables
+#### Environment Variables
 
 The package respects `.env` file (must not be committed to the repo though!). Here are the available variables:
 
@@ -72,4 +72,4 @@ Useful scripts
   - `bin/docker-build.sh` - build docker container from command line (supposes bash environment)
   - `bin/docker-run.sh` - run the built above container
 
-See also: [docker dev notes](./dev-notes.md)
+See also [Docker Dev Notes](./docs/dev-notes.md)
