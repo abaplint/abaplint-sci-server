@@ -1,10 +1,23 @@
-# Cloud foundry abaplint backend
+# abaplint Integration with SAP Code Inspector (Server)
 
-This project enables abaplint to be run in the context of SAP Code Inspector, allowing immediate feedback to the ABAP developers in their standard editor, SE24 / SE80 / SE38 / ABAP in Eclipse. And also works seamlessly with other places where the code inspector is triggered.
+This project enables abaplint to be run in the context of SAP Code Inspector (SCI), allowing immediate feedback to the ABAP developers in their standard editor, SE24 / SE80 / SE38 / ABAP in Eclipse. And also works seamlessly with other places where the code inspector is triggered like ABAP Test Cockpit (ATC).
 
-Use with [abaplint-sci-client](https://github.com/abaplint/abaplint-sci-client)
+Use with 
 
-## Deploying to Cloud Foundry
+## Overview
+
+The integration requires two parts: The abaplint Server (this project) and the [abaplint Client](https://github.com/abaplint/abaplint-sci-client). When performing code checks through one of the supported editors or transactions, the abaplint Client will collect the necessary objects and dependencies and send them to the abaplint Server to be processed. The server responds with all of the abaplint findings, which are displayed like any other check results in the SAP tools.
+
+![Components](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/abaplint/abaplint-cloud-foundry/master/docs/components.iuml)
+
+## Deployment Options
+
+The server is provided as a node application and docker image. It can therefore be deployed in several ways, for example:
+- Using SAP Cloud Foundry
+- Using Azure Container Instance
+- Using Docker On-premise
+
+### Deployment on Cloud Foundry
 - `cf login`
 - `npm install`
 - `npm test`
@@ -13,12 +26,13 @@ Use with [abaplint-sci-client](https://github.com/abaplint/abaplint-sci-client)
 
 Free CF trial at https://www.sap.com/cmp/td/sap-cloud-platform-trial.html
 
-## Overview
-![Components](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/abaplint/abaplint-cloud-foundry/master/docs/components.iuml)
+### Deployment on Azure Container Instance 
 
-## Or start in docker on-premises
+You can configure a Github action to automatically create an abaplint Server running in an Azure container instance (see [details](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-github-action).
 
-### Simple way
+### Deployment on Docker On-premises
+
+#### Simple way
 
 `docker run abaplint/abaplint-backend -p 3000:3000`
 
@@ -28,20 +42,20 @@ or for background
 
 your can change the port adding `-e "port=xxx"` param
 
-### Building own container
+#### Building own container
 
 See the content of `docker` directory. There are Dockerfile and docker-compose template. E.g. run `docker build -f docker/Dockerfile -t abaplint-backend .` to build your image from scratch.
 
 *TODO: https docker compose, logging advices*
 
-### Env variables
+#### Env variables
 
 The package respects `.env` file (must not be committed to the repo though!). Here are the available variables:
 
 - PORT - port to listen at
 - ALB_SUPPRESS_FRONPAGE_LOG - disable frontpage log: set `1` to disable
 
-## Development
+### Development Notes
 
 Useful scripts
 
