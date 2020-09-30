@@ -1,20 +1,22 @@
-## Commands
+## Docker Development Notes
+
+### Commands
 
 - `docker build -f Dockerfile -t abaplint-backend .`
 - `docker run -p 3000:3000 abaplint-backend`
 - `docker-compose -f docker-compose.yml --project-directory . up`
 
-## Useful
+### Useful
 
 - `docker rm $(docker ps -qa --no-trunc --filter "status=exited")` - remove stopped containers
 - `docker image prune` - remove dangling images (no tag)
 - `docker image prune -a` - remove all unused images
 
-## Cool
+### Cool
 
 - https://github.com/kevinpollet/typescript-docker-multi-stage-build
 
-## Docker Best Practices
+### Best Practices
 
 - https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md
 - maybe integrate better server closing: https://github.com/BretFisher/node-docker-good-defaults/blob/69c923bc646bc96003e9ada55d1ec5ca943a1b19/bin/www or use `stoppable` package ?
