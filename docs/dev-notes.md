@@ -1,4 +1,5 @@
 ## Commands
+
 - `docker build -f Dockerfile -t abaplint-backend .`
 - `docker run -p 3000:3000 abaplint-backend`
 - `docker-compose -f docker-compose.yml --project-directory . up`
@@ -10,9 +11,11 @@
 - `docker image prune -a` - remove all unused images
 
 ## Cool
+
 - https://github.com/kevinpollet/typescript-docker-multi-stage-build
 
-## Docker best practices
+## Docker Best Practices
+
 - https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md
 - maybe integrate better server closing: https://github.com/BretFisher/node-docker-good-defaults/blob/69c923bc646bc96003e9ada55d1ec5ca943a1b19/bin/www or use `stoppable` package ?
 - https://www.slideshare.net/Docker/dcsf-19-nodejs-rocks-in-docker-for-dev-and-ops
