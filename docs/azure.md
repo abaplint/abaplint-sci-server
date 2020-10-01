@@ -1,4 +1,4 @@
-## Deployment with Azure Container Instance
+## Deployment on Azure Container Instance
 
 The deployment of an abaplint server can be automated by using a Github action which will deploy the docker image on an Azure container instance.
 
