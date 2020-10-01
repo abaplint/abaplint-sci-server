@@ -14,7 +14,8 @@
     "strictFunctionTypes": true,
     "alwaysStrict": true,
     "target": "es2017",
-    "sourceMap": true
+    "sourceMap": true,
+    "resolveJsonModule": true
   },
   "include": [
     "./src/**/*.ts"

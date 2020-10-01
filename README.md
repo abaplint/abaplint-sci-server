@@ -35,6 +35,14 @@ A docker image is available on [Docker Hub](https://hub.docker.com/r/abaplint/ab
 
 You can configure a Github action to automatically create an abaplint Server running in an [Azure Container Instance](./docs/azure.md).
 
+### Environment params
+
+The server checks the following env params
+- PORT - port to listen at
+- VERBOSE - set 1 to output more verbose logs
+
+It also support `.env` file. You can specify e.g. `PORT=8080` there instead of using variables or command line. Env file must not be pushed to the git repo.
+
 ## Server Health
 
 ### Ping
