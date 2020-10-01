@@ -18,13 +18,14 @@ The server is provided as a node application and docker image. It can therefore 
 - Using Docker On-premise
 
 ### Deployment on Cloud Foundry
+
+Get the **free** [SAP Cloud Foundry Trial](https://www.sap.com/cmp/td/sap-cloud-platform-trial.html).
+
 - `cf login`
 - `npm install`
 - `npm test`
 - `npm run build`
 - `cf push`
-
-Free CF trial at https://www.sap.com/cmp/td/sap-cloud-platform-trial.html
 
 ### Deployment on Azure Container Instance 
 
@@ -32,46 +33,22 @@ You can configure a Github action to automatically create an abaplint Server run
 
 ### Deployment on Docker Image
 
-A complete docker image is available on [Docker Hub](https://hub.docker.com/r/abaplint/abaplint-backend).
+A docker image is available on [Docker Hub](https://hub.docker.com/r/abaplint/abaplint-backend). See [Docker Deployment](./docs/docker.md) for details.
 
-#### Simple Way
+## Server Health
 
-`docker run abaplint/abaplint-backend -p 3000:3000`
+### Ping
 
-or for background
+If you ping the FQDN of your abaplint Server, it should reply with message like:
+`Server is OK, abaplint version = 2.52.5`
 
-`docker run abaplint/abaplint-backend -p 3000:3000 -d`
+### Homepage
 
-You can change the port adding `-e "port=xxx"` parameter.
+The homepage of your server will show the abaplint version, some details about the server environment, and a list of the most recent
+abaplint API requests. 
 
-#### Building Own Container
+![abaplint Server homepage](./docs/abaplint-server.png)
 
-See the content of `docker` directory. There are Dockerfile and docker-compose template. E.g. run `docker build -f docker/Dockerfile -t abaplint-backend .` to build your image from scratch.
+## Development Notes
 
-*TODO: https docker compose, logging advices*
-
-#### Environment Variables
-
-The package respects `.env` file (must not be committed to the repo though!). Here are the available variables:
-
-- PORT - port to listen at
-- ALB_SUPPRESS_FRONPAGE_LOG - disable frontpage log: set `1` to disable
-
-### Development Notes
-
-Useful scripts
-
-- npm
-  - `npm run run` - start server
-  - `npm run lint` - lint code
-  - `npm run build` - build typescript into `build` dir
-  - `npm run dev` - start dev server (nodemon)
-  - `npm run dev:debug` - start nodemon with debugger
-  - `npm run test` - run tests
-  - `npm run test:watch` - run tests in watch mode
-  - `npm run start` - run built code with bare node - used for CF
-- docker
-  - `bin/docker-build.sh` - build docker container from command line (supposes bash environment)
-  - `bin/docker-run.sh` - run the built above container
-
-See also [Docker Dev Notes](./docs/dev-notes.md)
+[Docker Development Notes](./docs/dev-notes.md)
