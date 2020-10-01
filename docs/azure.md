@@ -26,20 +26,32 @@ The registry holds your abaplint docker images. Each new deployment will be tagg
 latest version and can savely delete any older images. It makes sense to keep the last working one, of course, until you confirm that any
 new deployment went ok.
 
+![Container Registry](azure-container-registry.png)
+
+![Container Registry_Repositories](azure-container-registry-repositories.png)
+
 2. Azure Container Instance
 
 The instance is based on one of the images in your registry. You can start and stop the instance which takes only a few seconds. Note the FQDN
 of your instance since this has to be entered into the abaplint client configuration.
 
+![Container Instance](azure-container-instance.png)
+
+![Container Instance Containers](azure-container-instance-containers.png)
+
 3. Github Settings
 
 In the settings of your repository, you maintain several secrets which contain the connection details to your Azure environment.
+
+![Github Secrets](azure-github-secrets.png)
 
 4. Github Action
 
 In your repository (your fork), add a file to /.github/workflows for example called azure.yml. Copy the content of 
 [azure.yml](https://github.com/mbtools/abaplint-sci-server/blob/master/.github/workflows/azure.yml) to it. You might have to
 adjust the location according to you Azure location. The file can be public since all sensitive information is kept only in the secrets of your repository.
+
+![Github Action](azure-github-action.png)
 
 ### Deployment
 
