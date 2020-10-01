@@ -12,10 +12,10 @@ The integration requires two parts: The abaplint Server (this project) and the [
 
 ## Deployment Options
 
-The server is provided as a node application and docker image. It can therefore be deployed in several ways, for example:
+The server is provided as a [NodeJs](https://nodejs.org) application and Docker image. It can therefore be deployed in several ways, for example:
 - Using SAP Cloud Foundry
-- Using Azure Container Instance
 - Using Docker On-premise
+- Using Azure Container Instance
 
 ### Deployment on Cloud Foundry
 
@@ -27,13 +27,13 @@ Get the **free** [SAP Cloud Foundry Trial](https://www.sap.com/cmp/td/sap-cloud-
 - `npm run build`
 - `cf push`
 
-### Deployment on Azure Container Instance 
-
-You can configure a Github action to automatically create an abaplint Server running in an [Azure Container Instance](./docs/azure.md).
-
 ### Deployment on Docker Image
 
 A docker image is available on [Docker Hub](https://hub.docker.com/r/abaplint/abaplint-backend). See [Docker Deployment](./docs/docker.md) for details.
+
+### Deployment on Azure Container Instance 
+
+You can configure a Github action to automatically create an abaplint Server running in an [Azure Container Instance](./docs/azure.md).
 
 ## Server Health
 
