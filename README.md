@@ -40,6 +40,7 @@ A docker image is available on [Docker Hub](https://hub.docker.com/r/abaplint/ab
 ### Ping
 
 If you ping the FQDN of your abaplint Server, it should reply with message like:
+
 `Server is OK, abaplint version = 2.52.5`
 
 ### Homepage
