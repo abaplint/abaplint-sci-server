@@ -8,6 +8,8 @@ The integration requires two parts: The abaplint Server (this project) and the [
 
 ![Components](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/abaplint/abaplint-cloud-foundry/master/docs/components.iuml)
 
+**Important:** The code under test leaves your ABAP system! Be sure to use a secure and controllable abaplint Server. For a test, you might use the common server at [http://sci.abaplint.org/](http://sci.abaplint.org/) (but please don't post any proprietary code).
+
 ## Deployment Options
 
 The server is provided as a node application and docker image. It can therefore be deployed in several ways, for example:
