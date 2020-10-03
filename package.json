@@ -3,20 +3,20 @@
   "version": "1.0.0",
   "private": true,
   "description": "testing",
-  "main": "build/server.js",
+  "main": "build/index.js",
   "bin": {
-    "abaplint-backend": "build/server.js"
+    "abaplint-backend": "build/index.js"
   },
   "scripts": {
-    "run": "ts-node src/server.ts",
-    "lint": "eslint src/**/*.ts",
+    "run": "ts-node index.ts",
+    "lint": "eslint index.ts src/**/*.ts",
     "build": "tsc && cp -R public ./build",
     "dev": "nodemon",
     "dev:debug": "nodemon --inspect",
     "test": "jest",
     "posttest": "npm run lint",
     "test:watch": "jest --watch",
-    "start": "node build/src/server.js"
+    "start": "node build/index.js"
   },
   "repository": {
     "type": "git",
