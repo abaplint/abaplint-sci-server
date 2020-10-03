@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -f docker/Dockerfile -t abaplint-backend .
+docker build -f Dockerfile -t abaplint-backend .

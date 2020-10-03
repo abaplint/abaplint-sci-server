@@ -10,13 +10,13 @@
   "scripts": {
     "run": "ts-node src/server.ts",
     "lint": "eslint src/**/*.ts",
-    "build": "tsc",
+    "build": "tsc && cp -R public ./build",
     "dev": "nodemon",
     "dev:debug": "nodemon --inspect",
     "test": "jest",
     "posttest": "npm run lint",
     "test:watch": "jest --watch",
-    "start": "node build/server.js"
+    "start": "node build/src/server.js"
   },
   "repository": {
     "type": "git",
