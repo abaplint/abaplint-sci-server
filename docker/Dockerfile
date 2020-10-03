@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci --quiet
 COPY ./public ./public
-COPY tsconfig.json ./
+COPY ["tsconfig.json", "index.ts", "./"]
 COPY ./src ./src
 RUN npm run build
 
@@ -31,4 +31,4 @@ COPY --from=builder /usr/src/app/build/ ./build
 
 # HEALTHCHECK --interval=30s CMD node healthcheck.js ? or curl localhost/healthz = OK ?
 
-ENTRYPOINT [ "/sbin/tini", "--", "node", "build/src/server.js" ]
+ENTRYPOINT [ "/sbin/tini", "--", "node", "build/index.js" ]
