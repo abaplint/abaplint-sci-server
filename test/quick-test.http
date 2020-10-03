@@ -19,3 +19,16 @@ GET http://localhost:3000/favicon.ico
 
 ### default config
 GET http://localhost:3000/api/v1/default_config
+
+### check object
+POST http://localhost:3000/api/v1/check_file
+content-type: application/json
+
+{
+    "configuration": "e30=",
+    "object": {
+      "objectName": "ZXXX",
+      "objectType": "PROG"
+    },
+    "files": []
+}

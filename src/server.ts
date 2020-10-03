@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-import * as dotenv from "dotenv";
-dotenv.config();
+import "./envargs"; // must be topmost
 import app from "./app";
 import type { Server } from "http";
 
