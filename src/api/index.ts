@@ -1,12 +1,10 @@
 import * as express from "express";
-import { checkObject } from "./check_object";
-import { defaultConfigHandler } from "./lint_config";
+import { createErrorResponse } from "./api-types";
 import { addInfoEx } from "../lib/log-tail";
+
+import { checkFileHandler } from "./check_file";
+import { defaultConfigHandler } from "./lint_config";
 import { pingHandler } from "./ping";
-import {
-  createErrorResponse,
-  createSuccessResponseAny,
-} from "./api-types";
 import { listRules } from "./list_rules";
 
 const router = express.Router();
@@ -17,29 +15,7 @@ router.use(express.urlencoded({limit: "50mb", extended: false}));
 router.get("/ping", pingHandler);
 router.get("/list_rules", listRules);
 router.get("/default_config", defaultConfigHandler);
-
-router.post("/check_file", (req, res) => {
-  // TODO validate request
-  let hrstart, result, hrend;
-  try {
-    hrstart = process.hrtime();
-    result = checkObject(req.body);
-    hrend = process.hrtime(hrstart);
-  } catch (err) {
-    err.message = "[abaplint] " + err.message;
-    throw err;
-  }
-
-  addInfoEx([
-    "check_file",
-    result.object.objectType,
-    result.object.objectName,
-    `${result.issues.length} issues`,
-    `${req.socket.bytesRead} bytes`,
-    `${(hrend[0] * 1000 + hrend[1] / 1000000).toFixed()} ms`,
-  ]);
-  res.json(createSuccessResponseAny(result));
-});
+router.post("/check_file", checkFileHandler);
 
 // app.post("/api/v1/check_configuration",
 // app.post("/api/v1/pretty_print",
