@@ -13,17 +13,35 @@
   - `npm run start` - run built code with bare node - used for CF
 - docker
   - `bin/docker-build.sh` - build docker container from command line (supposes bash environment)
-  - `bin/docker-run.sh` - run the built above container
+  - `bin/docker-run.sh` - run the built above container, add `-d` arg to run detached
+  - `bin/docker-test.sh` - test the container (must be built before) - requests /healthz API end point
+  - `bin/docker-cleanup.sh` - cleanups docker stuff: removes inactive containers, untagged images (use with care)
 
-### Commands
+### Manual commands
 
-- `docker build -f Dockerfile -t abaplint-backend .`
-- `docker run -p 3000:3000 abaplint-backend`
-- `docker-compose -f docker-compose.yml --project-directory . up`
+... Though prefer the scripts above.
 
+- `docker build -f docker/Dockerfile -t abaplint-backend .` - build
+- `docker run -p --rm 3000:3000 abaplint-backend` - run attached
+- `docker run -p --rm -d 3000:3000 abaplint-backend` - run detached (in background)
+- `docker-compose -f docker/docker-compose.yml --project-directory . up` - same but with the compose
+- `docker-compose -d -f docker/docker-compose.yml --project-directory . up` - detached
+
+- `docker ps` - running containers
+- `docker ps -a` - all created container (including exited)
+- `docker stop <id>` - stop specific container e.g. started detached
 - `docker rm $(docker ps -qa --no-trunc --filter "status=exited")` - remove stopped containers
 - `docker image prune` - remove dangling images (no tag)
 - `docker image prune -a` - remove all unused images
+
+### CI check list
+
+Check all of this works, if you change CI flows
+- `npm run run`
+- `npm run buil && npm run start`
+- `npm run dev`
+- `bin/docker-build.sh`, `bin/docker-run.sh -d`, `bin/docker-test.sh`, `bin/docker-cleanup.sh`
+- docker build and deploy flow in Github actions
 
 ### Cool
 

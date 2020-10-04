@@ -4,13 +4,13 @@ A docker image is available on [Docker Hub](https://hub.docker.com/r/abaplint/ab
 
 ### Simple Way
 
-`docker run abaplint/abaplint-backend -p 3000:3000`
+`docker run --rm -p 3000:3000 abaplint/abaplint-backend`
 
 or for background
 
-`docker run abaplint/abaplint-backend -p 3000:3000 -d`
+`docker run --rm -p 3000:3000 -d abaplint/abaplint-backend`
 
-You can change the port adding `-e "port=xxx"` parameter.
+You can change the port adding `-e "PORT=xxx"` parameter. Or the verbosity of log `-e "VERBOSE=1"`
 
 ### Building Own Container
 
@@ -24,4 +24,4 @@ The package respects `.env` file (must not be committed to the repo though!). He
 
 - PORT - port to listen at
 - ALB_SUPPRESS_FRONPAGE_LOG - disable frontpage log: set `1` to disable
-
+- VERBOSE - set to 1 to output more detail stdout log
