@@ -74,7 +74,7 @@ jobs:
       with:
         push: true
         context: .
-        path: ./docker/Dockerfile
+        file: ./docker/Dockerfile
         tags: |
           ${{ env.DOCKER_REPO }}:latest
           ${{ env.DOCKER_REPO }}:${{ steps.determine_version.outputs.NEW_VERSION }}
