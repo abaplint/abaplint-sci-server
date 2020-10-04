@@ -18,6 +18,7 @@ jobs:
   test-docker:
     runs-on: ubuntu-latest
     steps:
+    # This job uses scripts, not docker actions. To keep reusability and control consistency
     -
       uses: actions/checkout@v2
     -
@@ -42,6 +43,10 @@ jobs:
     steps:
     -
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        # This is have full depth of commits which are used in Version below
+        # Maybe worth changing the approach in future
     -
       name: Determine version
       id: determine_version
