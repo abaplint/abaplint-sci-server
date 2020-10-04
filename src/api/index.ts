@@ -1,11 +1,11 @@
 import * as express from "express";
-import { checkObject, CheckObjectOutput } from "./check_object";
-import { getDefaultConfig, GetDefaultConfigOutput } from "./lint_config";
+import { checkObject } from "./check_object";
+import { defaultConfigHandler } from "./lint_config";
 import { addInfoEx } from "../lib/log-tail";
 import { pingHandler } from "./ping";
 import {
   createErrorResponse,
-  createSuccessResponse,
+  createSuccessResponseAny,
 } from "./api-types";
 import { listRules } from "./list_rules";
 
@@ -16,12 +16,7 @@ router.use(express.urlencoded({limit: "50mb", extended: false}));
 
 router.get("/ping", pingHandler);
 router.get("/list_rules", listRules);
-
-router.get("/default_config", (_,res) => {
-  addInfoEx("default_config");
-  const defaultConfig = getDefaultConfig();
-  res.json(createSuccessResponse<GetDefaultConfigOutput>(defaultConfig));
-});
+router.get("/default_config", defaultConfigHandler);
 
 router.post("/check_file", (req, res) => {
   // TODO validate request
@@ -43,7 +38,7 @@ router.post("/check_file", (req, res) => {
     `${req.socket.bytesRead} bytes`,
     `${(hrend[0] * 1000 + hrend[1] / 1000000).toFixed()} ms`,
   ]);
-  res.json(createSuccessResponse<CheckObjectOutput>(result));
+  res.json(createSuccessResponseAny(result));
 });
 
 // app.post("/api/v1/check_configuration",
