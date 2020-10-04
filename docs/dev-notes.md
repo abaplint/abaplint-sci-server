@@ -34,6 +34,15 @@
 - `docker image prune` - remove dangling images (no tag)
 - `docker image prune -a` - remove all unused images
 
+### CI check list
+
+Check all of this works, if you change CI flows
+- `npm run run`
+- `npm run buil && npm run start`
+- `npm run dev`
+- `bin/docker-build.sh`, `bin/docker-run.sh -d`, `bin/docker-test.sh`, `bin/docker-cleanup.sh`
+- docker build and deploy flow in Github actions
+
 ### Cool
 
 - https://github.com/kevinpollet/typescript-docker-multi-stage-build
