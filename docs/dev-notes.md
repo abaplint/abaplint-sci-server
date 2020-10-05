@@ -22,8 +22,8 @@
 ... Though prefer the scripts above.
 
 - `docker build -f docker/Dockerfile -t abaplint-backend .` - build
-- `docker run -p --rm 3000:3000 abaplint-backend` - run attached
-- `docker run -p --rm -d 3000:3000 abaplint-backend` - run detached (in background)
+- `docker run --rm -p 3000:3000 abaplint-backend` - run attached
+- `docker run --rm -p -d 3000:3000 abaplint-backend` - run detached (in background)
 - `docker-compose -f docker/docker-compose.yml --project-directory . up` - same but with the compose
 - `docker-compose -d -f docker/docker-compose.yml --project-directory . up` - detached
 
