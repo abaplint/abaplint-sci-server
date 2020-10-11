@@ -1,61 +1,63 @@
-# Cloud foundry abaplint backend
+# abaplint SCI Server
 
-This project enables abaplint to be run in the context of SAP Code Inspector, allowing immediate feedback to the ABAP developers in their standard editor, SE24 / SE80 / SE38 / ABAP in Eclipse. And also works seamlessly with other places where the code inspector is triggered.
+This project enables [abaplint](https://abaplint.org) to be run in the context of SAP Code Inspector (SCI), allowing immediate feedback to the ABAP developers in their standard editor, SE24 / SE80 / SE38 / ABAP in Eclipse. And also works seamlessly with other places where the code inspector is triggered like ABAP Test Cockpit (ATC).
 
-Use with [abaplint-sci-client](https://github.com/abaplint/abaplint-sci-client)
+## Overview
 
-## Deploying to Cloud Foundry
+The integration requires two parts: The abaplint Server (this project) and the [abaplint Client](https://github.com/abaplint/abaplint-sci-client). When performing code checks through one of the supported editors or transactions, the abaplint Client will collect the necessary objects and dependencies and send them to the abaplint Server to be processed. The server responds with all of the abaplint findings, which are displayed like any other check results in the SAP tools.
+
+![Components](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/abaplint/abaplint-sci-server/master/docs/components.iuml)
+
+**Important:** The code under test leaves your ABAP system! Be sure to use a secure and controllable abaplint Server. For a test, you might use the common server at [http://sci.abaplint.org/](http://sci.abaplint.org/) (but please don't post any proprietary code).
+
+## Deployment Options
+
+The server is provided as a [NodeJs](https://nodejs.org) application and Docker image. It can therefore be deployed in several ways, for example:
+- Using SAP Cloud Foundry
+- Using Docker On-premise
+- Using Azure Container Instance
+
+### Deployment on Cloud Foundry
+
+Get the **free** [SAP Cloud Foundry Trial](https://www.sap.com/cmp/td/sap-cloud-platform-trial.html).
+
 - `cf login`
 - `npm install`
 - `npm test`
 - `npm run build`
 - `cf push`
 
-Free CF trial at https://www.sap.com/cmp/td/sap-cloud-platform-trial.html
+### Deployment on Docker Image
 
-## Overview
-![Components](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/abaplint/abaplint-cloud-foundry/master/docs/components.iuml)
+A docker image is available on [Docker Hub](https://hub.docker.com/r/abaplint/abaplint-backend). See [Docker Deployment](./docs/docker.md) for details.
 
-## Or start in docker on-premises
+### Deployment on Azure Container Instance 
 
-### Simple way
+You can configure a Github action to automatically create an abaplint Server running in an [Azure Container Instance](./docs/azure.md).
 
-`docker run abaplint/abaplint-backend -p 3000:3000`
+### Environment params
 
-or for background
-
-`docker run abaplint/abaplint-backend -p 3000:3000 -d`
-
-your can change the port adding `-e "port=xxx"` param
-
-### Building own container
-
-See the content of `docker` directory. There are Dockerfile and docker-compose template. E.g. run `docker build -f docker/Dockerfile -t abaplint-backend .` to build your image from scratch.
-
-*TODO: https docker compose, logging advices*
-
-### Env variables
-
-The package respects `.env` file (must not be committed to the repo though!). Here are the available variables:
-
+The server checks the following env params
 - PORT - port to listen at
-- ALB_SUPPRESS_FRONPAGE_LOG - disable frontpage log: set `1` to disable
+- VERBOSE - set 1 to output more verbose logs
 
-## Development
+It also support `.env` file. You can specify e.g. `PORT=8080` there instead of using variables or command line. Env file must not be pushed to the git repo.
 
-Useful scripts
+## Server Health
 
-- npm
-  - `npm run run` - start server
-  - `npm run lint` - lint code
-  - `npm run build` - build typescript into `build` dir
-  - `npm run dev` - start dev server (nodemon)
-  - `npm run dev:debug` - start nodemon with debugger
-  - `npm run test` - run tests
-  - `npm run test:watch` - run tests in watch mode
-  - `npm run start` - run built code with bare node - used for CF
-- docker
-  - `bin/docker-build.sh` - build docker container from command line (supposes bash environment)
-  - `bin/docker-run.sh` - run the built above container
+### Ping
 
-See also: [docker dev notes](./dev-notes.md)
+If you ping the FQDN of your abaplint Server, it should reply with message like:
+
+`Server is OK, abaplint version = 2.52.5`
+
+### Homepage
+
+The homepage of your server will show the abaplint version, some details about the server environment, and a list of the most recent
+abaplint API requests. 
+
+![abaplint Server homepage](./docs/abaplint-server.png)
+
+## Development Notes
+
+[Docker Development Notes](./docs/dev-notes.md)

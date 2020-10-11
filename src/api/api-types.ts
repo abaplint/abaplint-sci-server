@@ -33,3 +33,10 @@ export function createSuccessResponse<T>(payload: T): ApiResponseSuccess<T> {
     payload,
   };
 }
+
+export function createSuccessResponseAny(payload: unknown): ApiResponseSuccess<unknown> {
+  return {
+    success: 1,
+    payload,
+  };
+}
