@@ -18,10 +18,9 @@ jobs:
         - name: Determine Version
           id: determine_version
           run: |
-            npm install
             GIT_VERSION=`git rev-list HEAD --count`
             echo Git Version: $GIT_VERSION
-            ABAPLINT_VERSION=`node -p "require('@abaplint/core/package.json').version"`
+            ABAPLINT_VERSION=`jq '.dependencies."@abaplint/core".version' -r package-lock.json`
             echo abaplint Version: $ABAPLINT_VERSION
             NEW_VERSION=`echo ${GIT_VERSION}-${ABAPLINT_VERSION}`
             echo New Version: $NEW_VERSION
@@ -33,8 +32,9 @@ jobs:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
-        - run: |
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ steps.determine_version.outputs.NEW_VERSION }}
+        - name: 'Docker: Build and Push'
+          run: |
+            docker build . -f docker/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ steps.determine_version.outputs.NEW_VERSION }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ steps.determine_version.outputs.NEW_VERSION }}
             
         - name: 'Deploy to Azure Container Instances'
@@ -49,5 +49,6 @@ jobs:
             name: abaplint-backend
             ports: 80 3000
             location: 'east us'
-        - run: |
+        - name: 'Docker: Run'
+          run: |
             docker run -d --rm -p 3000:3000 ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ steps.determine_version.outputs.NEW_VERSION }}
