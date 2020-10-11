@@ -5,17 +5,11 @@ jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
         steps:
-        # checkout the repo
-        - name: 'Checkout GitHub Action'
+
+        - name: 'abaplint: Checkout'
           uses: actions/checkout@master
           
-        # login to azure
-        - name: 'Login via Azure CLI'
-          uses: azure/login@v1
-          with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-        - name: Determine Version
+        - name: 'abaplint: Determine Version'
           id: determine_version
           run: |
             GIT_VERSION=`git rev-list HEAD --count`
@@ -26,18 +20,24 @@ jobs:
             echo New Version: $NEW_VERSION
             echo "::set-output name=NEW_VERSION::$NEW_VERSION"
 
-        - name: 'Build and Push Image'
+        - name: 'Azure: Login'
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+        - name: 'Azure: Docker Login'
           uses: azure/docker-login@v1
           with:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
-        - name: 'Docker: Build and Push'
+
+        - name: 'Docker: Build and Push Image'
           run: |
             docker build . -f docker/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ steps.determine_version.outputs.NEW_VERSION }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ steps.determine_version.outputs.NEW_VERSION }}
             
-        - name: 'Deploy to Azure Container Instances'
+        - name: 'Azure: Deploy to Container Instances'
           uses: 'azure/aci-deploy@v1'
           with:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
@@ -48,7 +48,8 @@ jobs:
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: abaplint-backend
             ports: 80 3000
-            location: 'east us'
+            location: ${{ secrets.LOCATION }}
+
         - name: 'Docker: Run'
           run: |
             docker run -d --rm -p 3000:3000 ${{ secrets.REGISTRY_LOGIN_SERVER }}/abaplint-backend:${{ steps.determine_version.outputs.NEW_VERSION }}
