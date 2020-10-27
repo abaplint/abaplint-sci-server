@@ -27,6 +27,8 @@ Get the **free** [SAP Cloud Foundry Trial](https://www.sap.com/cmp/td/sap-cloud-
 - `npm run build`
 - `cf push`
 
+> :bulb: If you are using Git for Windows, you can run it via Git Bash.
+
 ### Deployment on Docker Image
 
 A docker image is available on [Docker Hub](https://hub.docker.com/r/abaplint/abaplint-backend). See [Docker Deployment](./docs/docker.md) for details.
