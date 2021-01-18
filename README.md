@@ -21,15 +21,7 @@ The server is provided as a [NodeJs](https://nodejs.org) application and Docker 
 
 See [Deployment Options](./docs/deployment.md)
 
-## Server Health
-
-### Ping
-
-If you ping the FQDN of your abaplint Server, it should reply with message like:
-
-`Server is OK, abaplint version = 2.52.5`
-
-### Homepage
+## Homepage
 
 The homepage of your server will show the abaplint version, some details about the server environment, and a list of the most recent
 abaplint API requests.
