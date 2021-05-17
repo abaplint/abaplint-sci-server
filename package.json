@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/abaplint/abaplint-sci-server#readme",
   "dependencies": {
-    "@abaplint/core": "^2.74.16",
+    "@abaplint/core": "^2.74.18",
     "commander": "^7.2.0",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
