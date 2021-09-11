@@ -18,6 +18,10 @@ If your "hello world" runs successfully, setting up abaplint server will be a pi
 The abaplint server image requires about 0.02GB and easily fits into the Basic SKU for an Azure container which currently provides 10GB (see 
 [Pricing](https://azure.microsoft.com/en-us/pricing/details/container-instances/)).
 
+Note: Azure credentials expire after 90 days of inactivity. If you do not update you container instance and the credentials expire, then you have to create them again
+as described [here](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-github-action#create-service-principal-for-azure-authentication) 
+and update AZURE_CREDENTIALS, REGISTRY_USERNAME, and REGISTRY_PASSWORD in your repository secrets (see below).
+
 ### Setup
 
 1. Azure Container Registry
