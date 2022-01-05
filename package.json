@@ -11,6 +11,7 @@
     "run": "ts-node index.ts",
     "lint": "eslint index.ts src/**/*.ts",
     "build": "tsc && cp -R public ./build",
+    "build_win": "tsc && xcopy /y public \"build\\public\\\"",
     "dev": "nodemon",
     "dev:debug": "nodemon --inspect",
     "test": "jest",
