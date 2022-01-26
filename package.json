@@ -34,7 +34,7 @@
   "dependencies": {
     "@abaplint/core": "^2.84.7",
     "commander": "^8.3.0",
-    "dotenv": "^14.3.0",
+    "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "helmet": "^4.6.0",
     "morgan": "^1.10.0",
