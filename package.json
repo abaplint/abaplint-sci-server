@@ -52,7 +52,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
     "jest": "^27.5.1",
-    "nodemon": "^2.0.16",
+    "nodemon": "^2.0.18",
     "supertest": "^6.2.3",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.8.1",
