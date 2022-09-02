@@ -1,4 +1,4 @@
-FROM node:12-alpine as builder
+FROM node:16-alpine as builder
 
 WORKDIR /usr/src/app
 
@@ -10,7 +10,7 @@ COPY ./src ./src
 RUN npm run build
 
 
-FROM node:12-alpine
+FROM node:16-alpine
 
 RUN apk add --no-cache git tini
 
