@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/abaplint/abaplint-sci-server#readme",
   "dependencies": {
-    "@abaplint/core": "^2.94.14",
+    "@abaplint/core": "^2.95.23",
     "commander": "^8.3.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -44,18 +44,18 @@
     "@types/express": "^4.17.17",
     "@types/helmet": "4.0.0",
     "@types/jest": "^29.4.0",
-    "@types/morgan": "^1.9.3",
-    "@types/node": "^18.11.18",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "^18.14.0",
     "@types/serve-favicon": "^2.5.3",
     "@types/supertest": "^2.0.12",
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
-    "eslint": "^8.26.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "eslint": "^8.34.0",
     "jest": "^29.4.3",
     "nodemon": "^2.0.20",
-    "supertest": "^6.3.1",
-    "ts-jest": "^29.0.3",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   }
 }
