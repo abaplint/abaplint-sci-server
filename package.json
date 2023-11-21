@@ -43,7 +43,7 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/helmet": "4.0.0",
-    "@types/jest": "^29.5.7",
+    "@types/jest": "^29.5.9",
     "@types/morgan": "^1.9.6",
     "@types/node": "^20.9.3",
     "@types/serve-favicon": "^2.5.7",
