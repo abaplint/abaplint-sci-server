@@ -1,4 +1,4 @@
-apiVersion: apps/v1 
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: abaplint
@@ -20,12 +20,12 @@ spec:
         sidecar.istio.io/inject: "true"
     spec:
       containers:
-      - image: abaplint/abaplint-backend
-        name: abaplint
-        imagePullPolicy: "Always"
-        ports:
-        - containerPort: 3000
+        - image: abaplint/abaplint-backend
           name: abaplint
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 3000
+              name: abaplint
 ---
 apiVersion: v1
 kind: Service
@@ -41,21 +41,21 @@ spec:
     app: abaplint
     tier: frontend
 ---
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v1beta1
 kind: APIRule
 metadata:
   labels:
     app: abaplint
   name: abaplint
 spec:
+  host: abaplint
   service:
-    host: abaplint
     name: abaplint
     port: 3000
   gateway: kyma-gateway.kyma-system.svc.cluster.local
   rules:
     - path: /.*
-      methods: ["GET", "PUT", "POST", "HEAD", "PATCH", "DELETE" ]
+      methods: ["GET", "PUT", "POST", "HEAD", "PATCH", "DELETE"]
       accessStrategies:
         - handler: noop
       mutators: []
