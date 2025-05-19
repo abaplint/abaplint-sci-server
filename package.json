@@ -35,13 +35,13 @@
     "@abaplint/core": "^2.113.114",
     "commander": "^8.3.0",
     "dotenv": "^16.5.0",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "helmet": "^4.6.0",
     "morgan": "^1.10.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
+    "@types/express": "^5.0.2",
     "@types/helmet": "4.0.0",
     "@types/jest": "^29.5.13",
     "@types/morgan": "^1.9.6",
